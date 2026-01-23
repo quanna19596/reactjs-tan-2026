@@ -33,6 +33,6 @@ export default {
       if (!data) return undefined;
       return JSON.parse(data);
     },
-    remove: (key: string): void => localStorage.removeItem(key),
+    remove: (key: string): void => sessionStorage.removeItem(key),
   },
 };
