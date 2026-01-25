@@ -1,11 +1,8 @@
 export default {
   rootUrl: import.meta.env.VITE_ROOT_URL ?? "",
   service: {
-    xedapviethung: {
-      baseUrl: import.meta.env.VITE_XEDAPVIETHUNG_SERVICE ?? "",
-    },
-    petStore: {
-      baseUrl: import.meta.env.VITE_PETSTORE_SERVICE ?? "",
+    dummy: {
+      baseUrl: import.meta.env.VITE_DUMMY_SERVICE_BASE_URL ?? "",
     },
   },
   cookie: {
