@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { LoginForm } from "@/containers/LoginForm";
+import LoginForm from "@/containers/admin/LoginForm";
 import { CookieStorage } from "@/utils/storage";
 
 export const Route = createFileRoute("/dashboard")({
