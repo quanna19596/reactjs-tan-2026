@@ -5,5 +5,9 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
-  return <p>Public Layout</p>;
+  return (
+    <div>
+      <p>Public Layout</p>
+    </div>
+  );
 }
