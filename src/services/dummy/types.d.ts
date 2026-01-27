@@ -1,4 +1,4 @@
-import type { TCommonService, TRequest, TResponse } from "@/services/types";
+import type { TCommonService } from "@/services/types";
 
 export namespace TDummyServiceType {
   export namespace TCommon {
@@ -12,11 +12,39 @@ export namespace TDummyServiceType {
   }
 
   export namespace TModel {
+    export type TUser = {
+      id?: number;
+      username: string;
+      email: string;
+      firstName: string;
+      lastName: string;
+      gender: string;
+      image: string;
+    };
+
     export type TProduct = {
       id?: number;
       title: string;
       description: string;
     };
+  }
+
+  export namespace TAuth {
+    export namespace TLogin {
+      export type TPaths = {};
+      export type TQueries = {};
+      export type TBody = {
+        username: string;
+        password: string;
+      };
+      export type TRequest = TCommon.TRequest<TPaths, TQueries, TBody>;
+      export type TResponse = TCommon.TResponse<
+        TModel.TUser & {
+          accessToken: string;
+          refreshToken: string;
+        }
+      >;
+    }
   }
 
   export namespace TProducts {

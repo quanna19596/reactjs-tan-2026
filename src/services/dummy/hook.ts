@@ -1,14 +1,21 @@
 import {
   keepPreviousData,
-  useMutation,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
+import { useAxiosMutation } from "@/services/hooks";
 import DummyApi from "./api";
 import { TDummyQueryKey } from "./enum";
 import type { TDummyServiceType } from "./types";
 
-const DummyHook = {
+export default {
+  Auth: {
+    useLogin: () => {
+      return useAxiosMutation({
+        mutationFn: DummyApi.Auth.login,
+      });
+    },
+  },
   Products: {
     useGetAllProducts: (
       params: TDummyServiceType.TProducts.TGetAllProducts.TRequest,
@@ -30,13 +37,11 @@ const DummyHook = {
       });
     },
 
-    useAddNewProduct: (
-      params: TDummyServiceType.TProducts.TAddNewProduct.TRequest,
-    ) => {
+    useAddNewProduct: () => {
       const queryClient = useQueryClient();
 
-      return useMutation({
-        mutationFn: () => DummyApi.Products.addNewProduct(params),
+      return useAxiosMutation({
+        mutationFn: DummyApi.Products.addNewProduct,
         onSuccess: () => {
           queryClient.invalidateQueries({
             queryKey: [TDummyQueryKey.TProducts.GET_ALL_PRODUCTS],
@@ -48,13 +53,11 @@ const DummyHook = {
       });
     },
 
-    useUpdateProduct: (
-      params: TDummyServiceType.TProducts.TUpdateProduct.TRequest,
-    ) => {
+    useUpdateProduct: () => {
       const queryClient = useQueryClient();
 
-      return useMutation({
-        mutationFn: () => DummyApi.Products.updateProduct(params),
+      return useAxiosMutation({
+        mutationFn: DummyApi.Products.updateProduct,
         onSuccess: () => {
           queryClient.invalidateQueries({
             queryKey: [TDummyQueryKey.TProducts.GET_ALL_PRODUCTS],
@@ -66,13 +69,11 @@ const DummyHook = {
       });
     },
 
-    useDeleteProduct: (
-      params: TDummyServiceType.TProducts.TDeleteProduct.TRequest,
-    ) => {
+    useDeleteProduct: () => {
       const queryClient = useQueryClient();
 
-      return useMutation({
-        mutationFn: () => DummyApi.Products.deleteProduct(params),
+      return useAxiosMutation({
+        mutationFn: DummyApi.Products.deleteProduct,
         onSuccess: () => {
           queryClient.invalidateQueries({
             queryKey: [TDummyQueryKey.TProducts.GET_ALL_PRODUCTS],
@@ -85,5 +86,3 @@ const DummyHook = {
     },
   },
 };
-
-export default DummyHook;

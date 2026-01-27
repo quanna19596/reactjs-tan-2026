@@ -534,6 +534,10 @@
   * {
     font-family: var(--font-primary);
   }
+
+  html, body, #app {
+    min-height: 100vh;
+  }
 }
 
 @theme inline {

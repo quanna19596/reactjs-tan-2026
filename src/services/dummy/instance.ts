@@ -1,27 +1,17 @@
 import axios from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 import env from "@/env";
-import { CookieStorage } from "@/utils/storage";
-
-const getAccessToken = () => CookieStorage.get("atk");
-const getRefreshToken = () => CookieStorage.get("rtk");
-const storeAccessToken = (token: string) => CookieStorage.set("atk", token);
-const storeRefreshToken = (token: string) => CookieStorage.set("rtk", token);
-const logout = () => {
-  CookieStorage.remove("atk");
-  CookieStorage.remove("rtk");
-  location.reload;
-};
+import Utils from "./utils";
 
 const DummyInstance = axios.create({
   baseURL: env.service.dummy.baseUrl,
 });
 
 const refreshAuthLogic = async (failedRequest: any) => {
-  const refreshToken = getRefreshToken();
+  const refreshToken = Utils.getRefreshToken();
 
   if (!refreshToken) {
-    logout();
+    Utils.logout();
     return Promise.reject();
   }
 
@@ -35,13 +25,13 @@ const refreshAuthLogic = async (failedRequest: any) => {
       { headers: { "Content-Type": "application/json" } },
     );
 
-    storeAccessToken(data.accessToken);
-    storeRefreshToken(data.refreshToken);
+    Utils.storeAccessToken(data.accessToken);
+    Utils.storeRefreshToken(data.refreshToken);
 
     failedRequest.response.config.headers.Authorization = `Bearer ${data.accessToken}`;
     return Promise.resolve();
   } catch (error) {
-    logout();
+    Utils.logout();
     return Promise.reject(error);
   }
 };
@@ -52,7 +42,7 @@ createAuthRefreshInterceptor(DummyInstance, refreshAuthLogic, {
 });
 
 DummyInstance.interceptors.request.use((config) => {
-  const token = getAccessToken();
+  const token = Utils.getAccessToken();
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

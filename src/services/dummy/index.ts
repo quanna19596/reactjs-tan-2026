@@ -1,9 +1,11 @@
-import DummyApi from "./api";
-import DummyHook from "./hook";
+import Api from "./api";
+import Hook from "./hook";
+import Utils from "./utils";
 
 const DummyService = {
-  Api: DummyApi,
-  Hook: DummyHook,
+  Api,
+  Hook,
+  Utils,
 };
 
 export default DummyService;

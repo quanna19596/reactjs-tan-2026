@@ -1,7 +1,15 @@
 import DummyInstance from "./instance";
 import type { TDummyServiceType } from "./types";
 
-const DummyApi = {
+export default {
+  Auth: {
+    login: async (
+      params: TDummyServiceType.TAuth.TLogin.TRequest,
+    ): Promise<TDummyServiceType.TAuth.TLogin.TResponse> => {
+      const response = await DummyInstance.post(`/auth/login`, params.body);
+      return response.data;
+    },
+  },
   Products: {
     getAllProducts: async (
       params: TDummyServiceType.TProducts.TGetAllProducts.TRequest,
@@ -46,5 +54,3 @@ const DummyApi = {
     },
   },
 };
-
-export default DummyApi;
