@@ -9,9 +9,10 @@ export default {
   storeRefreshToken: (token: string) => {
     CookieStorage.set("rtk", token);
   },
-  logout: () => {
+  removeAccessToken: () => CookieStorage.remove("atk"),
+  removeRefreshToken: () => CookieStorage.remove("rtk"),
+  clearAuthTokens: () => {
     CookieStorage.remove("atk");
     CookieStorage.remove("rtk");
-    location.reload();
   },
 };

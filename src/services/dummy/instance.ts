@@ -11,7 +11,8 @@ const refreshAuthLogic = async (failedRequest: any) => {
   const refreshToken = Utils.getRefreshToken();
 
   if (!refreshToken) {
-    Utils.logout();
+    Utils.clearAuthTokens();
+    location.reload();
     return Promise.reject();
   }
 
@@ -31,7 +32,8 @@ const refreshAuthLogic = async (failedRequest: any) => {
     failedRequest.response.config.headers.Authorization = `Bearer ${data.accessToken}`;
     return Promise.resolve();
   } catch (error) {
-    Utils.logout();
+    Utils.clearAuthTokens();
+    location.reload();
     return Promise.reject(error);
   }
 };
