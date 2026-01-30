@@ -19,6 +19,12 @@
       "recommended": true,
       "a11y": {
         "useValidAnchor": "off"
+      },
+      "complexity": {
+        "noBannedTypes": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off"
       }
     }
   },

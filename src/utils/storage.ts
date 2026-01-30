@@ -1,5 +1,5 @@
-import env from "@/env";
 import Cookies from "js-cookie";
+import env from "@/env";
 
 const cookieOptions = {
   path: "/",
