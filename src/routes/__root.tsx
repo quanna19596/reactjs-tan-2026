@@ -7,21 +7,23 @@ import { Toaster } from "@/shadcn/ui/sonner";
 const queryClient = new QueryClient();
 
 export const Route = createRootRoute({
-  component: () => (
-    <QueryClientProvider client={queryClient}>
-      <Outlet />
-      <Toaster position="top-center" />
-      <TanStackDevtools
-        config={{
-          position: "bottom-right",
-        }}
-        plugins={[
-          {
-            name: "Tanstack Router",
-            render: <TanStackRouterDevtoolsPanel />,
-          },
-        ]}
-      />
-    </QueryClientProvider>
-  ),
+  component: () => {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <Outlet />
+        <Toaster position="top-center" />
+        <TanStackDevtools
+          config={{
+            position: "bottom-right",
+          }}
+          plugins={[
+            {
+              name: "Tanstack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+      </QueryClientProvider>
+    );
+  },
 });

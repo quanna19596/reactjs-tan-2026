@@ -9,19 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as Char123LocaleChar125RouteImport } from './routes/{-$locale}'
 import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as DashboardUsersRouteImport } from './routes/dashboard.users'
+import { Route as Char123LocaleChar125HelloRouteImport } from './routes/{-$locale}/hello'
+import { Route as Char123LocaleChar125404RouteImport } from './routes/{-$locale}/404'
+import { Route as DashboardUsersRouteImport } from './routes/dashboard/users'
 
+const Char123LocaleChar125Route = Char123LocaleChar125RouteImport.update({
+  id: '/{-$locale}',
+  path: '/{-$locale}',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
+const Char123LocaleChar125HelloRoute =
+  Char123LocaleChar125HelloRouteImport.update({
+    id: '/hello',
+    path: '/hello',
+    getParentRoute: () => Char123LocaleChar125Route,
+  } as any)
+const Char123LocaleChar125404Route = Char123LocaleChar125404RouteImport.update({
+  id: '/404',
+  path: '/404',
+  getParentRoute: () => Char123LocaleChar125Route,
 } as any)
 const DashboardUsersRoute = DashboardUsersRouteImport.update({
   id: '/users',
@@ -30,36 +43,65 @@ const DashboardUsersRoute = DashboardUsersRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/{-$locale}': typeof Char123LocaleChar125RouteWithChildren
   '/dashboard/users': typeof DashboardUsersRoute
+  '/{-$locale}/404': typeof Char123LocaleChar125404Route
+  '/{-$locale}/hello': typeof Char123LocaleChar125HelloRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/{-$locale}': typeof Char123LocaleChar125RouteWithChildren
   '/dashboard/users': typeof DashboardUsersRoute
+  '/{-$locale}/404': typeof Char123LocaleChar125404Route
+  '/{-$locale}/hello': typeof Char123LocaleChar125HelloRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/{-$locale}': typeof Char123LocaleChar125RouteWithChildren
   '/dashboard/users': typeof DashboardUsersRoute
+  '/{-$locale}/404': typeof Char123LocaleChar125404Route
+  '/{-$locale}/hello': typeof Char123LocaleChar125HelloRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/dashboard/users'
+  fullPaths:
+    | '/dashboard'
+    | '/{-$locale}'
+    | '/dashboard/users'
+    | '/{-$locale}/404'
+    | '/{-$locale}/hello'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/dashboard/users'
-  id: '__root__' | '/' | '/dashboard' | '/dashboard/users'
+  to:
+    | '/dashboard'
+    | '/{-$locale}'
+    | '/dashboard/users'
+    | '/{-$locale}/404'
+    | '/{-$locale}/hello'
+  id:
+    | '__root__'
+    | '/dashboard'
+    | '/{-$locale}'
+    | '/dashboard/users'
+    | '/{-$locale}/404'
+    | '/{-$locale}/hello'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  Char123LocaleChar125Route: typeof Char123LocaleChar125RouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/{-$locale}': {
+      id: '/{-$locale}'
+      path: '/{-$locale}'
+      fullPath: '/{-$locale}'
+      preLoaderRoute: typeof Char123LocaleChar125RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -67,12 +109,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+    '/{-$locale}/hello': {
+      id: '/{-$locale}/hello'
+      path: '/hello'
+      fullPath: '/{-$locale}/hello'
+      preLoaderRoute: typeof Char123LocaleChar125HelloRouteImport
+      parentRoute: typeof Char123LocaleChar125Route
+    }
+    '/{-$locale}/404': {
+      id: '/{-$locale}/404'
+      path: '/404'
+      fullPath: '/{-$locale}/404'
+      preLoaderRoute: typeof Char123LocaleChar125404RouteImport
+      parentRoute: typeof Char123LocaleChar125Route
     }
     '/dashboard/users': {
       id: '/dashboard/users'
@@ -96,9 +145,22 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface Char123LocaleChar125RouteChildren {
+  Char123LocaleChar125404Route: typeof Char123LocaleChar125404Route
+  Char123LocaleChar125HelloRoute: typeof Char123LocaleChar125HelloRoute
+}
+
+const Char123LocaleChar125RouteChildren: Char123LocaleChar125RouteChildren = {
+  Char123LocaleChar125404Route: Char123LocaleChar125404Route,
+  Char123LocaleChar125HelloRoute: Char123LocaleChar125HelloRoute,
+}
+
+const Char123LocaleChar125RouteWithChildren =
+  Char123LocaleChar125Route._addFileChildren(Char123LocaleChar125RouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  Char123LocaleChar125Route: Char123LocaleChar125RouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
