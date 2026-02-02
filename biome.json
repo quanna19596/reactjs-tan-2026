@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!**/*.css", "!src/shadcn"]
+    "includes": ["**", "!**/*.css", "!src/shadcn", "!src/i18n"]
   },
   "formatter": {
     "enabled": true,
