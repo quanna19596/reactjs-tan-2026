@@ -1,4 +1,9 @@
-import { ChevronUp, type LucideProps, User2 } from "lucide-react";
+import {
+  type FileRoutesByPath,
+  useLocation,
+  useNavigate,
+} from "@tanstack/react-router";
+import { ChevronUp, type LucideProps } from "lucide-react";
 import type { ForwardRefExoticComponent, RefAttributes } from "react";
 import {
   DropdownMenu,
@@ -23,11 +28,11 @@ import { ThemeToggle } from "./theme-toggle";
 type TAppSidebarItem = {
   id: string;
   title: string;
-  url?: string;
+  url?: keyof FileRoutesByPath;
   icon?: ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
   >;
-  onClick: (item: { id: string; title: string; url?: string }) => void;
+  onClick?: (item: Omit<TAppSidebarItem, "onClick" | "icon">) => void;
 };
 
 type TMenuGroup = {
@@ -49,6 +54,9 @@ const AppSidebar = ({
   mainMenu,
   footerMenu,
 }: TAppSidebarProps) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -68,13 +76,18 @@ const AppSidebar = ({
                 {group.items.map((item) => (
                   <SidebarMenuItem key={item.id}>
                     <SidebarMenuButton
+                      isActive={item.url && pathname.includes(item.url)}
                       asChild
                       onClick={() => {
-                        item.onClick({
+                        item?.onClick?.({
                           id: item.id,
                           title: item.title,
-                          url: item.url || "",
+                          url: item.url,
                         });
+
+                        if (item.url) {
+                          navigate({ to: item.url });
+                        }
                       }}
                     >
                       <div>
@@ -107,7 +120,7 @@ const AppSidebar = ({
                   <DropdownMenuItem
                     key={item.id}
                     onClick={() =>
-                      item.onClick({
+                      item?.onClick?.({
                         id: item.id,
                         title: item.title,
                       })

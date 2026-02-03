@@ -42,26 +42,25 @@ function RouteComponent() {
               title: "Application",
               items: [
                 {
-                  id: "home",
-                  title: "Home",
-                  url: "#",
+                  id: "users",
+                  title: "Users",
+                  url: "/dashboard/users",
                   icon: Home,
-                  onClick: () => {},
                 },
-                {
-                  id: "inbox",
-                  title: "Inbox",
-                  url: "#",
-                  icon: Inbox,
-                  onClick: () => {},
-                },
-                {
-                  id: "calendar",
-                  title: "Calendar",
-                  url: "#",
-                  icon: Calendar,
-                  onClick: () => {},
-                },
+                // {
+                //   id: "inbox",
+                //   title: "Inbox",
+                //   url: "#",
+                //   icon: Inbox,
+                //   onClick: () => {},
+                // },
+                // {
+                //   id: "calendar",
+                //   title: "Calendar",
+                //   url: "#",
+                //   icon: Calendar,
+                //   onClick: () => {},
+                // },
               ],
             },
           ]}
